@@ -1,0 +1,18 @@
+code.lineNumbers{
+    display: inline-grid;
+    width: 2em;
+}
+.declare{
+  color: blue;
+    font-weight: bold;
+}
+
+.reserved{
+    color: crimson;
+    font-weight: bold;
+}
+
+.string{
+    color: green;
+    font-weight: bold;
+}

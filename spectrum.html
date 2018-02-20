@@ -1,0 +1,65 @@
+<meta  charset="utf-8"><link rel="stylesheet" href="css/code.css">
+<code><div class="codeLine"> /* </div>
+<div class="codeLine">  * This program is the main program we will use at FSR. It takes spectrum readings from the spectrometer and saves them to a file with their corresponding wavelengths. </div>
+<div class="codeLine">  * After these readings are taken, it determines the average spectrum reading and max spectrum reading with its corresponding wavelength. </div>
+<div class="codeLine">  */ </div>
+<div class="codeLine">  </div>
+<div class="codeLine"> #include <stdio.h> </div>
+<div class="codeLine"> #include <stdlib.h> </div>
+<div class="codeLine"> #include <string.h> </div>
+<div class="codeLine"> #include <pthread.h> </div>
+<div class="codeLine"> #include <time.h> </div>
+<div class="codeLine"> #include <sys/time.h> </div>
+<div class="codeLine"> #include <errno.h> </div>
+<div class="codeLine"> #include <span class="string">"api/SeaBreezeWrapper.h"</span> </div>
+<div class="codeLine">  </div>
+<div class="codeLine"> <span class="declare">int</span> main() { </div>
+<div class="codeLine"> 	<span class="declare">char</span> fileName[] = { <span class="string">"spectrum.csv"</span> }; </div>
+<div class="codeLine"> 	 </div>
+<div class="codeLine"> 	<span class="declare">double</span> maxSpec = 0; </div>
+<div class="codeLine"> 	<span class="declare">double</span> avgSpec = 0; </div>
+<div class="codeLine"> 	<span class="declare">double</span> totalSpec = 0; </div>
+<div class="codeLine"> 	<span class="declare">double</span> maxWave = 0; </div>
+<div class="codeLine">  </div>
+<div class="codeLine"> 	<span class="declare">int</span> errorCode; </div>
+<div class="codeLine">  </div>
+<div class="codeLine"> 	<span class="declare">int</span> open = seabreeze_open_spectrometer(0,&errorCode); //Opens device attached to system <span class="reserved">if</span> there is one </div>
+<div class="codeLine"> 	<span class="reserved">if</span> (open == 1) { //If no device opened, program exits </div>
+<div class="codeLine"> 		<span class="reserved">printf</span>(<span class="string">"--NO SPECTROMETER FOUND--\n"</span>); </div>
+<div class="codeLine"> 		return 0; </div>
+<div class="codeLine"> 	} </div>
+<div class="codeLine">  </div>
+<div class="codeLine"> 	<span class="declare">char</span> model[16]; </div>
+<div class="codeLine"> 	<span class="declare">int</span> pixels = seabreeze_get_formatted_spectrum_length(0, &errorCode); //Acquires a spectrum and returns answer in formatted floats </div>
+<div class="codeLine">  </div>
+<div class="codeLine"> 	<span class="declare">double</span> *wavelength = (double*) malloc(pixels * sizeof(<span class="declare">double</span>)); </div>
+<div class="codeLine"> 	seabreeze_get_wavelengths(0,&errorCode,wavelength,pixels); //Computes wavelengths <span class="reserved">for</span> the spectrometer and fills <span class="string">"wavelength" array with those values up to "pixels"</span> value </div>
+<div class="codeLine">  </div>
+<div class="codeLine"> 	<span class="declare">double</span> *spectrum = (double*) malloc(pixels * sizeof(<span class="declare">double</span>)); </div>
+<div class="codeLine"> 	seabreeze_get_formatted_spectrum(0,&errorCode,spectrum,pixels); //Acquires the spectrum and returns in formatted floats and places this in the <span class="string">"spectrum" array up to "pixels"</span> value </div>
+<div class="codeLine">  </div>
+<div class="codeLine"> 	<span class="declare">FILE</span> *csv = fopen(fileName,<span class="string">"w"</span>); </div>
+<div class="codeLine">  </div>
+<div class="codeLine"> 	<span class="reserved">fprintf</span>(csv, <span class="string">"Wavelength, Spectrum\n"</span>); </div>
+<div class="codeLine"> 	<span class="reserved">for</span>(<span class="declare">int</span> i = 0; i < pixels; i += 5){ </div>
+<div class="codeLine"> 		<span class="reserved">for</span>(<span class="declare">int</span> k = 0; k < 5 && k+i<pixels; k++){ </div>
+<div class="codeLine"> 			<span class="reserved">fprintf</span>(csv,<span class="string">"%f,%f\n",wavelength[k+i],spectrum[k+i]); //Writes wavelength and spectrum at each pixel to "spectrum.csv"</span> </div>
+<div class="codeLine"> 			totalSpec += spectrum[k+i]; </div>
+<div class="codeLine"> 			<span class="reserved">if</span> (maxSpec < spectrum[k+i] & k + i > 1) { //Sets maxSpec <span class="reserved">if</span> spectrum reading is higher than other specrum readings, skips first two readings because of bad values </div>
+<div class="codeLine"> 				maxSpec = spectrum[k+i]; </div>
+<div class="codeLine"> 				maxWave = wavelength[k+i]; </div>
+<div class="codeLine"> 			} </div>
+<div class="codeLine"> 		} </div>
+<div class="codeLine"> 	} </div>
+<div class="codeLine">  </div>
+<div class="codeLine"> 	<span class="reserved">printf</span>(<span class="string">"Output written to \"%s\"\n"</span>, fileName); </div>
+<div class="codeLine">  </div>
+<div class="codeLine"> 	avgSpec = totalSpec/pixels; </div>
+<div class="codeLine"> 	<span class="reserved">printf</span>(<span class="string">"MAX: %f AVG: %f\nWAVELENGTH AT MAX: %f nm\n"</span>, maxSpec, avgSpec, maxWave); </div>
+<div class="codeLine">  </div>
+<div class="codeLine"> 	seabreeze_close_spectrometer(0, &errorCode); //Closes device </div>
+<div class="codeLine"> 	fclose(csv); //Closes spectrum file </div>
+<div class="codeLine">  </div>
+<div class="codeLine"> 	return 0; </div>
+<div class="codeLine"> } </div>
+</code>
