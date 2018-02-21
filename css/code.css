@@ -1,7 +1,3 @@
-code.lineNumbers{
-    display: inline-grid;
-    width: 2em;
-}
 .declare{
   color: blue;
     font-weight: bold;
@@ -15,4 +11,21 @@ code.lineNumbers{
 .string{
     color: green;
     font-weight: bold;
+}
+
+code{
+    color: black;
+    background-color: lightgray;
+    overflow: auto;
+    white-space: nowrap;
+    width: 100%;
+    display: inline-block;
+}
+.panel-heading{
+    color: lightblue;
+    background-color: #333;
+}
+
+.panel-body{
+    background-color: darkgray;
 }
