@@ -1,0 +1,10 @@
+#radiobuttons label{
+	padding: 10px;
+	margin: 5px;
+}
+#radiobuttons input{
+	margin: 0 20px;
+}
+.panel {
+	text-align: center;
+}
