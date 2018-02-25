@@ -1,82 +1,82 @@
 <meta  charset="utf-8"><link rel="stylesheet" href="css/code.css">
-<code>/* <br>
- * This program takes input from the spectrometer, then based on its spectrum readings,<br>
- * it determines the color of an LED it is pointed at.<br>
- * As is, the program just runs until you kill the window it's in. Not important to make it pretty,<br>
- * but it'd be hella cool <span class="reserved">if</span> we did.<br>
- */<br>
-<br>
-#include &lt;stdio.h&gt;<br>
-#include &lt;stdlib.h&gt;<br>
-#include &lt;string.h&gt;<br>
-#include &lt;pthread.h&gt;<br>
-#include &lt;time.h&gt;<br>
-#include &lt;sys/time.h&gt;<br>
-#include &lt;errno.h&gt;<br>
-#include <span class="string">"api/SeaBreezeWrapper.h"</span><br>
-#include &lt;unistd.h&gt;<br>
-<br>
-<span class="declare">int</span> getColor();<br>
-<br>
-<span class="declare">char</span> *colors[] ={<br>
-	<span class="string">"BLACK"</span>,<br>
-	<span class="string">"RED"</span>,<br>
-	<span class="string">"ORANGE"</span>,<br>
-	<span class="string">"YELLOW"</span>,<br>
-	<span class="string">"GREEN"</span>,<br>
-	<span class="string">"BLUE"</span>,<br>
-	<span class="string">"WHITE"</span><br>
-};<br>
-<span class="declare">double</span> waveStart[11] ={<br>
-	99999, 780, 622, 597, 577, 492, 455, 390, 0<br>
-};<br>
-<br>
-<span class="declare">int</span> errorCode;<br>
-<br>
-<span class="declare">int</span> main() {<br>
-	<span class="declare">int</span> open = <span class="reserved">seabreeze_open_spectrometer</span>(0,&amp;errorCode); //Opens device attached to system <span class="reserved">if</span> there is one<br>
-	<span class="reserved">if</span> (open == 0) {<br>
-		<span class="reserved">for</span> (;;) {<br>
-			getColor();<br>
-			sleep(1); //Waits one second before getting color again<br>
-		}<br>
-		<span class="reserved">seabreeze_close_spectrometer</span>(0, &amp;errorCode); //CLoses device<br>
-	}<br>
-	<span class="reserved">else</span> //Exits program <span class="reserved">if</span> no device is opened<br>
-		<span class="reserved">printf</span>(<span class="string">"--NO SPECTROMETER FOUND--\n"</span>);<br>
-	return 0;<br>
-}<br>
-<br>
-<span class="declare">int</span> getColor() {<br>
-<br>
-	<span class="declare">double</span> maxSpec = 0;<br>
-	<span class="declare">double</span> maxWave = 0;<br>
-	<span class="declare">char</span> model[16];<br>
-<br>
-	<span class="declare">int</span> pixels = <span class="reserved">seabreeze_get_formatted_spectrum_length</span>(0, &amp;errorCode); //Acquires a spectrum and returns answer in formatted floats<br>
-<br>
-	<span class="declare">double</span> *wavelength = (double*) malloc(pixels * <span class="reserved">sizeof</span>(<span class="declare">double</span>));<br>
-	<span class="reserved">seabreeze_get_wavelengths</span>(0,&amp;errorCode,wavelength,pixels); //Computes wavelengths <span class="reserved">for</span> the spectrometer and fills <span class="string">"wavelength" array with those values up to "pixels"</span> value<br>
-<br>
-	<span class="declare">double</span> *spectrum = (double*) malloc(pixels * <span class="reserved">sizeof</span>(<span class="declare">double</span>));<br>
-	<span class="reserved">seabreeze_get_formatted_spectrum</span>(0,&amp;errorCode,spectrum,pixels); //Acquires the spectrum and returns in formatted floats and places this in the <span class="string">"spectrum" array up to "pixels"</span> value<br>
-<br>
-	<span class="reserved">for</span>(<span class="declare">int</span> i = 0; i&lt;pixels; i += 5){<br>
-		<span class="reserved">for</span>(<span class="declare">int</span> k = 0; k &lt; 5 &amp;&amp; k+i&lt;pixels; k++){<br>
-			<span class="reserved">if</span> (maxSpec &lt; spectrum[k+i] &amp; k + i &gt; 1) {<br>
-				maxSpec = spectrum[k+i];<br>
-				maxWave = wavelength[k+i];<br>
-			}<br>
-		}<br>
-	}<br>
-	<span class="declare">int</span> LED = 0;<br>
-	<span class="reserved">for</span> (<span class="declare">int</span> i = 0; i &lt; 8; i++) { //Compares wavelength of max spectrum reading to determine color based on colors array<br>
-		<span class="reserved">if</span> (maxWave &lt; waveStart[i] &amp;&amp; maxWave &gt;= waveStart[i + 1] &amp;&amp; maxSpec &gt; 5000 &amp;&amp; LED == 0) {<br>
-			<span class="reserved">printf</span>(<span class="string">"%s\n"</span>, colors[i]);<br>
-			LED = 1;<br>
-		}<br>
-	}<br>
-	<span class="reserved">if</span> (LED == 0) //If light source is not bright enough<br>
-		<span class="reserved">printf</span>(<span class="string">"NO LED\n"</span>);<br>
-}<br>
+<code><div> /*  </div><br>
+<div>  * This program takes input from the spectrometer, then based on its spectrum readings, </div><br>
+<div>  * it determines the color of an LED it is pointed at. </div><br>
+<div>  * As is, the program just runs until you kill the window it's in. Not important to make it pretty, </div><br>
+<div>  * but it'd be hella cool <span class="reserved">if</span> we did. </div><br>
+<div>  */ </div><br>
+<div>  </div><br>
+<div> #include &lt;stdio.h&gt; </div><br>
+<div> #include &lt;stdlib.h&gt; </div><br>
+<div> #include &lt;string.h&gt; </div><br>
+<div> #include &lt;pthread.h&gt; </div><br>
+<div> #include &lt;time.h&gt; </div><br>
+<div> #include &lt;sys/time.h&gt; </div><br>
+<div> #include &lt;errno.h&gt; </div><br>
+<div> #include <span class="string">"api/SeaBreezeWrapper.h"</span> </div><br>
+<div> #include &lt;unistd.h&gt; </div><br>
+<div>  </div><br>
+<div> <span class="declare">int</span> getColor(); </div><br>
+<div>  </div><br>
+<div> <span class="declare">char</span> *colors[] ={ </div><br>
+<div> 	<span class="string">"BLACK"</span>, </div><br>
+<div> 	<span class="string">"RED"</span>, </div><br>
+<div> 	<span class="string">"ORANGE"</span>, </div><br>
+<div> 	<span class="string">"YELLOW"</span>, </div><br>
+<div> 	<span class="string">"GREEN"</span>, </div><br>
+<div> 	<span class="string">"BLUE"</span>, </div><br>
+<div> 	<span class="string">"WHITE"</span> </div><br>
+<div> }; </div><br>
+<div> <span class="declare">double</span> waveStart[11] ={ </div><br>
+<div> 	99999, 780, 622, 597, 577, 492, 455, 390, 0 </div><br>
+<div> }; </div><br>
+<div>  </div><br>
+<div> <span class="declare">int</span> errorCode; </div><br>
+<div>  </div><br>
+<div> <span class="declare">int</span> main() { </div><br>
+<div> 	<span class="declare">int</span> open = <span class="reserved">seabreeze_open_spectrometer</span>(0,&amp;errorCode); //Opens device attached to system <span class="reserved">if</span> there is one </div><br>
+<div> 	<span class="reserved">if</span> (open == 0) { </div><br>
+<div> 		<span class="reserved">for</span> (;;) { </div><br>
+<div> 			getColor(); </div><br>
+<div> 			sleep(1); //Waits one second before getting color again </div><br>
+<div> 		} </div><br>
+<div> 		<span class="reserved">seabreeze_close_spectrometer</span>(0, &amp;errorCode); //CLoses device </div><br>
+<div> 	} </div><br>
+<div> 	<span class="reserved">else</span> //Exits program <span class="reserved">if</span> no device is opened </div><br>
+<div> 		<span class="reserved">printf</span>(<span class="string">"--NO SPECTROMETER FOUND--\n"</span>); </div><br>
+<div> 	return 0; </div><br>
+<div> } </div><br>
+<div>  </div><br>
+<div> <span class="declare">int</span> getColor() { </div><br>
+<div>  </div><br>
+<div> 	<span class="declare">double</span> maxSpec = 0; </div><br>
+<div> 	<span class="declare">double</span> maxWave = 0; </div><br>
+<div> 	<span class="declare">char</span> model[16]; </div><br>
+<div>  </div><br>
+<div> 	<span class="declare">int</span> pixels = <span class="reserved">seabreeze_get_formatted_spectrum_length</span>(0, &amp;errorCode); //Acquires a spectrum and returns answer in formatted floats </div><br>
+<div>  </div><br>
+<div> 	<span class="declare">double</span> *wavelength = (double*) malloc(pixels * <span class="reserved">sizeof</span>(<span class="declare">double</span>)); </div><br>
+<div> 	<span class="reserved">seabreeze_get_wavelengths</span>(0,&amp;errorCode,wavelength,pixels); //Computes wavelengths <span class="reserved">for</span> the spectrometer and fills <span class="string">"wavelength" array with those values up to "pixels"</span> value </div><br>
+<div>  </div><br>
+<div> 	<span class="declare">double</span> *spectrum = (double*) malloc(pixels * <span class="reserved">sizeof</span>(<span class="declare">double</span>)); </div><br>
+<div> 	<span class="reserved">seabreeze_get_formatted_spectrum</span>(0,&amp;errorCode,spectrum,pixels); //Acquires the spectrum and returns in formatted floats and places this in the <span class="string">"spectrum" array up to "pixels"</span> value </div><br>
+<div>  </div><br>
+<div> 	<span class="reserved">for</span>(<span class="declare">int</span> i = 0; i&lt;pixels; i += 5){ </div><br>
+<div> 		<span class="reserved">for</span>(<span class="declare">int</span> k = 0; k &lt; 5 &amp;&amp; k+i&lt;pixels; k++){ </div><br>
+<div> 			<span class="reserved">if</span> (maxSpec &lt; spectrum[k+i] &amp; k + i &gt; 1) { </div><br>
+<div> 				maxSpec = spectrum[k+i]; </div><br>
+<div> 				maxWave = wavelength[k+i]; </div><br>
+<div> 			} </div><br>
+<div> 		} </div><br>
+<div> 	} </div><br>
+<div> 	<span class="declare">int</span> LED = 0; </div><br>
+<div> 	<span class="reserved">for</span> (<span class="declare">int</span> i = 0; i &lt; 8; i++) { //Compares wavelength of max spectrum reading to determine color based on colors array </div><br>
+<div> 		<span class="reserved">if</span> (maxWave &lt; waveStart[i] &amp;&amp; maxWave &gt;= waveStart[i + 1] &amp;&amp; maxSpec &gt; 5000 &amp;&amp; LED == 0) { </div><br>
+<div> 			<span class="reserved">printf</span>(<span class="string">"%s\n"</span>, colors[i]); </div><br>
+<div> 			LED = 1; </div><br>
+<div> 		} </div><br>
+<div> 	} </div><br>
+<div> 	<span class="reserved">if</span> (LED == 0) //If light source is not bright enough </div><br>
+<div> 		<span class="reserved">printf</span>(<span class="string">"NO LED\n"</span>); </div><br>
+<div> } </div><br>
 </code>

@@ -13,11 +13,16 @@
     font-weight: bold;
 }
 
+.lineNumbers{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+}
 code{
     color: black;
     background-color: lightgray;
     overflow: auto;
-    white-space: nowrap;
     width: 100%;
     display: inline-block;
 }
@@ -28,4 +33,15 @@ code{
 
 .panel-body{
     background-color: darkgray;
+}
+
+panel-heading a, panel-heading a:visited, panel-heading a:link{
+    font-size: 1.5em;
+    color: #fff;
+}
+
+code div{
+    padding-left: 2em;
+    text-indent: -2em;
+    display: inline-block;
 }
