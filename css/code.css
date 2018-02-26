@@ -32,7 +32,8 @@ code{
 }
 
 
-panel-heading a, panel-heading a:visited, panel-heading a:link{
+.panel-heading a, .panel-heading a:visited, .panel-heading a:link{
+    display: inline-block;
     font-size: 1.5em;
     color: #fff;
 }
