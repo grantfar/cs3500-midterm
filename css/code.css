@@ -49,3 +49,6 @@ code div{
 .tab {
     padding-left: 15px;
 }
+#example1Collapse, #example1Wrap, #example2Collapse, #example2Wrap {
+    width: 150px;
+}
