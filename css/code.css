@@ -45,3 +45,7 @@ code div{
     text-indent: -2em;
     display: inline-block;
 }
+
+.tab {
+    padding-left: 15px;
+}
