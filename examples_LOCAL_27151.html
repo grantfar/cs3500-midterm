@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Seabreeze Tutorial: Sample Code</title>
+        <title>Seabreaze Documentation</title>
         <meta  charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="css/reset.css">
         <link rel="stylesheet" href="css/bootstrap.css">
@@ -27,22 +27,8 @@
                     <ul class="nav navbar-nav">
                         <li><a href="installation.html">Installation</a></li>
                         <li><a href="about.html">About</a></li>
-<<<<<<< HEAD
                         <li><a href="examples.html">Examples</a></li>
                         <li><a href="useage.html">Usage</a></li>
-=======
-                        <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Methods<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="open_spectrometer.html">seabreeze_open_spectrometer</a></li>
-                            <li><a href="formatted_spectrum_length.html">seabreeze_get_formatted_spectrum_length</a></li>
-                            <li><a href="get_wavelengths.html">seabreeze_get_wavelengths</a></li>
-                            <li><a href="formatted_spectrum.html">seabreeze_get_formatted_spectrum</a></li>
-                            <li><a href="close_spectrometer.html">seabreeze_close_spectrometer</a></li>
-                        </ul>
-                    </li>
-                        <li class="active"><a href="examples.html">Code Samples</a></li>
->>>>>>> 8db2e6f972619806d535d18f5e8e44854a1ee350
                         <li><a href="vote.html">Voting</a></li>
                     </ul>
                 </div>
@@ -57,7 +43,7 @@
                     <div class="col-xs-4"><h4>spectrum.c</h4></div>
                     <div class="col-xs-4 button-group">
                         <button type="button" class="btn btn-primary" id="example1Collapse">Collapse</button>
-                        <button type="button" class="btn btn-primary" id="example1Wrap">Text Wrap: [ON]</button>
+                        <button type="button" class="btn btn-primary" id="example1Wrap">Text Wrap</button>
                     </div>
                 </div>
                 <div class="row panel-body" id="example1Body">
@@ -270,7 +256,7 @@
                     <div class="col-xs-10 col-sm-11">
                         <code>
                             <div> /* </div><br>
-                            <div>  * This program takes spectrum readings from the spectrometer and saves them to a file with their corresponding wavelengths. </div><br>
+                            <div>  * This program is the main program we will use at FSR. It takes spectrum readings from the spectrometer and saves them to a file with their corresponding wavelengths. </div><br>
                             <div>  * After these readings are taken, it determines the average spectrum reading and max spectrum reading with its corresponding wavelength. </div><br>
                             <div>  */ </div><br>
                             <div>  </div><br>
@@ -284,53 +270,53 @@
                             <div> #include <span class="string">"api/SeaBreezeWrapper.h"</span> </div><br>
                             <div>  </div><br>
                             <div> <span class="declare">int</span> main() { </div><br>
-                            <div> <span class="tab"></span><span class=""></span><span class="declare">char</span> fileName[] = { <span class="string">"spectrum.csv"</span> }; </div><br>
+                            <div> 	<span class="declare">char</span> fileName[] = { <span class="string">"spectrum.csv"</span> }; </div><br>
                             <div> 	 </div><br>
-                            <div> 	<span class="tab"></span><span class="declare">double</span> maxSpec = 0; </div><br>
-                            <div> 	<span class="tab"></span><span class="declare">double</span> avgSpec = 0; </div><br>
-                            <div> 	<span class="tab"></span><span class="declare">double</span> totalSpec = 0; </div><br>
-                            <div> 	<span class="tab"></span><span class="declare">double</span> maxWave = 0; </div><br>
+                            <div> 	<span class="declare">double</span> maxSpec = 0; </div><br>
+                            <div> 	<span class="declare">double</span> avgSpec = 0; </div><br>
+                            <div> 	<span class="declare">double</span> totalSpec = 0; </div><br>
+                            <div> 	<span class="declare">double</span> maxWave = 0; </div><br>
                             <div>  </div><br>
-                            <div> 	<span class="tab"></span><span class="declare">int</span> errorCode; </div><br>
+                            <div> 	<span class="declare">int</span> errorCode; </div><br>
                             <div>  </div><br>
-                            <div> 	<span class="tab"></span><span class="declare">int</span> open = <span class="reserved">seabreeze_open_spectrometer</span>(0,&amp;errorCode); //Opens device attached to system <span class="reserved">if</span> there is one </div><br>
-                            <div> 	<span class="tab"></span><span class="reserved">if</span> (open == 1) { //If no device opened, program exits </div><br>
-                            <div> 		<span class="tab"></span><span class="tab"></span><span class="reserved">printf</span>(<span class="string">"--NO SPECTROMETER FOUND--\n"</span>); </div><br>
-                            <div> 		<span class="tab"></span><span class="tab"></span>return 0; </div><br>
-                            <div> 	<span class="tab"></span>} </div><br>
+                            <div> 	<span class="declare">int</span> open = <span class="reserved">seabreeze_open_spectrometer</span>(0,&amp;errorCode); //Opens device attached to system <span class="reserved">if</span> there is one </div><br>
+                            <div> 	<span class="reserved">if</span> (open == 1) { //If no device opened, program exits </div><br>
+                            <div> 		<span class="reserved">printf</span>(<span class="string">"--NO SPECTROMETER FOUND--\n"</span>); </div><br>
+                            <div> 		return 0; </div><br>
+                            <div> 	} </div><br>
                             <div>  </div><br>
-                            <div> 	<span class="tab"></span><span class="declare">char</span> model[16]; </div><br>
-                            <div> 	<span class="tab"></span><span class="declare">int</span> pixels = <span class="reserved">seabreeze_get_formatted_spectrum_length</span>(0, &amp;errorCode); //Acquires a spectrum and returns answer in formatted floats </div><br>
+                            <div> 	<span class="declare">char</span> model[16]; </div><br>
+                            <div> 	<span class="declare">int</span> pixels = <span class="reserved">seabreeze_get_formatted_spectrum_length</span>(0, &amp;errorCode); //Acquires a spectrum and returns answer in formatted floats </div><br>
                             <div>  </div><br>
-                            <div> 	<span class="tab"></span><span class="declare">double</span> *wavelength = (double*) malloc(pixels * <span class="reserved">sizeof</span>(<span class="declare">double</span>)); </div><br>
-                            <div> 	<span class="tab"></span><span class="reserved">seabreeze_get_wavelengths</span>(0,&amp;errorCode,wavelength,pixels); //Computes wavelengths <span class="reserved">for</span> the spectrometer and fills <span class="string">"wavelength" array with those values up to "pixels"</span> value </div><br>
+                            <div> 	<span class="declare">double</span> *wavelength = (double*) malloc(pixels * <span class="reserved">sizeof</span>(<span class="declare">double</span>)); </div><br>
+                            <div> 	<span class="reserved">seabreeze_get_wavelengths</span>(0,&amp;errorCode,wavelength,pixels); //Computes wavelengths <span class="reserved">for</span> the spectrometer and fills <span class="string">"wavelength" array with those values up to "pixels"</span> value </div><br>
                             <div>  </div><br>
-                            <div> 	<span class="tab"></span><span class="declare">double</span> *spectrum = (double*) malloc(pixels * <span class="reserved">sizeof</span>(<span class="declare">double</span>)); </div><br>
-                            <div> 	<span class="tab"></span><span class="reserved">seabreeze_get_formatted_spectrum</span>(0,&amp;errorCode,spectrum,pixels); //Acquires the spectrum and returns in formatted floats and places this in the <span class="string">"spectrum" array up to "pixels"</span> value </div><br>
+                            <div> 	<span class="declare">double</span> *spectrum = (double*) malloc(pixels * <span class="reserved">sizeof</span>(<span class="declare">double</span>)); </div><br>
+                            <div> 	<span class="reserved">seabreeze_get_formatted_spectrum</span>(0,&amp;errorCode,spectrum,pixels); //Acquires the spectrum and returns in formatted floats and places this in the <span class="string">"spectrum" array up to "pixels"</span> value </div><br>
                             <div>  </div><br>
-                            <div> 	<span class="tab"></span><span class="declare">FILE</span> *csv = fopen(fileName,<span class="string">"w"</span>); </div><br>
+                            <div> 	<span class="declare">FILE</span> *csv = fopen(fileName,<span class="string">"w"</span>); </div><br>
                             <div>  </div><br>
-                            <div> 	<span class="tab"></span><span class="reserved">fprintf</span>(csv, <span class="string">"Wavelength, Spectrum\n"</span>); </div><br>
-                            <div> 	<span class="tab"></span><span class="reserved">for</span>(<span class="declare">int</span> i = 0; i &lt; pixels; i += 5){ </div><br>
-                            <div> 		<span class="tab"></span><span class="tab"></span><span class="reserved">for</span>(<span class="declare">int</span> k = 0; k &lt; 5 &amp;&amp; k+i&lt;pixels; k++){ </div><br>
-                            <div> 			<span class="tab"></span><span class="tab"></span><span class="tab"></span><span class="reserved">fprintf</span>(csv,<span class="string">"%f,%f\n",wavelength[k+i],spectrum[k+i]); //Writes wavelength and spectrum at each pixel to "spectrum.csv"</span> </div><br>
-                            <div> 			<span class="tab"></span><span class="tab"></span><span class="tab"></span>totalSpec += spectrum[k+i]; </div><br>
-                            <div> 			<span class="tab"></span><span class="tab"></span><span class="tab"></span><span class="reserved">if</span> (maxSpec &lt; spectrum[k+i] &amp; k + i &gt; 1) { //Sets maxSpec <span class="reserved">if</span> spectrum reading is higher than other specrum readings, skips first two readings because of bad values </div><br>
-                            <div> 				<span class="tab"></span><span class="tab"></span><span class="tab"></span><span class="tab"></span>maxSpec = spectrum[k+i]; </div><br>
-                            <div> 				<span class="tab"></span><span class="tab"></span><span class="tab"></span><span class="tab"></span>maxWave = wavelength[k+i]; </div><br>
-                            <div> 			<span class="tab"></span><span class="tab"></span><span class="tab"></span>} </div><br>
-                            <div> 		<span class="tab"></span><span class="tab"></span>} </div><br>
-                            <div> 	<span class="tab"></span>} </div><br>
+                            <div> 	<span class="reserved">fprintf</span>(csv, <span class="string">"Wavelength, Spectrum\n"</span>); </div><br>
+                            <div> 	<span class="reserved">for</span>(<span class="declare">int</span> i = 0; i &lt; pixels; i += 5){ </div><br>
+                            <div> 		<span class="reserved">for</span>(<span class="declare">int</span> k = 0; k &lt; 5 &amp;&amp; k+i&lt;pixels; k++){ </div><br>
+                            <div> 			<span class="reserved">fprintf</span>(csv,<span class="string">"%f,%f\n",wavelength[k+i],spectrum[k+i]); //Writes wavelength and spectrum at each pixel to "spectrum.csv"</span> </div><br>
+                            <div> 			totalSpec += spectrum[k+i]; </div><br>
+                            <div> 			<span class="reserved">if</span> (maxSpec &lt; spectrum[k+i] &amp; k + i &gt; 1) { //Sets maxSpec <span class="reserved">if</span> spectrum reading is higher than other specrum readings, skips first two readings because of bad values </div><br>
+                            <div> 				maxSpec = spectrum[k+i]; </div><br>
+                            <div> 				maxWave = wavelength[k+i]; </div><br>
+                            <div> 			} </div><br>
+                            <div> 		} </div><br>
+                            <div> 	} </div><br>
                             <div>  </div><br>
-                            <div> 	<span class="tab"></span><span class="reserved">printf</span>(<span class="string">"Output written to \"%s\"\n"</span>, fileName); </div><br>
+                            <div> 	<span class="reserved">printf</span>(<span class="string">"Output written to \"%s\"\n"</span>, fileName); </div><br>
                             <div>  </div><br>
-                            <div> 	<span class="tab"></span>avgSpec = totalSpec/pixels; </div><br>
-                            <div> 	<span class="tab"></span><span class="reserved">printf</span>(<span class="string">"MAX: %f AVG: %f\nWAVELENGTH AT MAX: %f nm\n"</span>, maxSpec, avgSpec, maxWave); </div><br>
+                            <div> 	avgSpec = totalSpec/pixels; </div><br>
+                            <div> 	<span class="reserved">printf</span>(<span class="string">"MAX: %f AVG: %f\nWAVELENGTH AT MAX: %f nm\n"</span>, maxSpec, avgSpec, maxWave); </div><br>
                             <div>  </div><br>
-                            <div> 	<span class="tab"></span><span class="reserved">seabreeze_close_spectrometer</span>(0, &amp;errorCode); //Closes device </div><br>
-                            <div> 	<span class="tab"></span>fclose(csv); //Closes spectrum file </div><br>
+                            <div> 	<span class="reserved">seabreeze_close_spectrometer</span>(0, &amp;errorCode); //Closes device </div><br>
+                            <div> 	fclose(csv); //Closes spectrum file </div><br>
                             <div>  </div><br>
-                            <div> 	<span class="tab"></span>return 0; </div><br>
+                            <div> 	return 0; </div><br>
                             <div> } </div><br>
 
                         </code>
@@ -345,7 +331,7 @@
                     <div class="col-xs-4"><h4>color.c</h4></div>
                     <div class="col-xs-4 button-group">
                         <button type="button" class="btn btn-primary" id="example2Collapse">Collapse</button>
-                        <button type="button" class="btn btn-primary" id="example2Wrap">Text Wrap: [ON]</button>
+                        <button type="button" class="btn btn-primary" id="example2Wrap">Text Wrap</button>
                     </div>
                 </div>
                 <div class="row panel-body" id="example2Body">
@@ -558,6 +544,8 @@
                             <div> /*  </div><br>
                             <div>  * This program takes input from the spectrometer, then based on its spectrum readings, </div><br>
                             <div>  * it determines the color of an LED it is pointed at. </div><br>
+                            <div>  * As is, the program just runs until you kill the window it's in. Not important to make it pretty, </div><br>
+                            <div>  * but it'd be hella cool <span class="reserved">if</span> we did. </div><br>
                             <div>  */ </div><br>
                             <div>  </div><br>
                             <div> #include &lt;stdio.h&gt; </div><br>
@@ -573,65 +561,65 @@
                             <div> <span class="declare">int</span> getColor(); </div><br>
                             <div>  </div><br>
                             <div> <span class="declare">char</span> *colors[] ={ </div><br>
-                            <div> 	<span class="tab"></span><span class="string">"BLACK"</span>, </div><br>
-                            <div> 	<span class="tab"></span><span class="string">"RED"</span>, </div><br>
-                            <div> 	<span class="tab"></span><span class="string">"ORANGE"</span>, </div><br>
-                            <div> 	<span class="tab"></span><span class="string">"YELLOW"</span>, </div><br>
-                            <div> 	<span class="tab"></span><span class="string">"GREEN"</span>, </div><br>
-                            <div> 	<span class="tab"></span><span class="string">"BLUE"</span>, </div><br>
-                            <div> 	<span class="tab"></span><span class="string">"WHITE"</span> </div><br>
+                            <div> 	<span class="string">"BLACK"</span>, </div><br>
+                            <div> 	<span class="string">"RED"</span>, </div><br>
+                            <div> 	<span class="string">"ORANGE"</span>, </div><br>
+                            <div> 	<span class="string">"YELLOW"</span>, </div><br>
+                            <div> 	<span class="string">"GREEN"</span>, </div><br>
+                            <div> 	<span class="string">"BLUE"</span>, </div><br>
+                            <div> 	<span class="string">"WHITE"</span> </div><br>
                             <div> }; </div><br>
                             <div> <span class="declare">double</span> waveStart[11] ={ </div><br>
-                            <div> 	<span class="tab"></span>99999, 780, 622, 597, 577, 492, 455, 390, 0 </div><br>
+                            <div> 	99999, 780, 622, 597, 577, 492, 455, 390, 0 </div><br>
                             <div> }; </div><br>
                             <div>  </div><br>
                             <div> <span class="declare">int</span> errorCode; </div><br>
                             <div>  </div><br>
                             <div> <span class="declare">int</span> main() { </div><br>
-                            <div> 	<span class="tab"></span><span class="declare">int</span> open = <span class="reserved">seabreeze_open_spectrometer</span>(0,&amp;errorCode); //Opens device attached to system <span class="reserved">if</span> there is one </div><br>
-                            <div> 	<span class="tab"></span><span class="reserved">if</span> (open == 0) { </div><br>
-                            <div> 		<span class="tab"></span><span class="tab"></span><span class="reserved">for</span> (;;) { </div><br>
-                            <div> 			<span class="tab"></span><span class="tab"></span><span class="tab"></span>getColor(); </div><br>
-                            <div> 			<span class="tab"></span><span class="tab"></span><span class="tab"></span>sleep(1); //Waits one second before getting color again </div><br>
-                            <div> 		<span class="tab"></span><span class="tab"></span>} </div><br>
-                            <div> 		<span class="tab"></span><span class="reserved">seabreeze_close_spectrometer</span>(0, &amp;errorCode); //Closes device </div><br>
-                            <div> 	<span class="tab"></span>} </div><br>
-                            <div> 	<span class="tab"></span><span class="reserved">else</span> //Exits program <span class="reserved">if</span> no device is opened </div><br>
-                            <div> 		<span class="tab"></span><span class="tab"></span><span class="reserved">printf</span>(<span class="string">"--NO SPECTROMETER FOUND--\n"</span>); </div><br>
-                            <div> 	<span class="tab"></span>return 0; </div><br>
+                            <div> 	<span class="declare">int</span> open = <span class="reserved">seabreeze_open_spectrometer</span>(0,&amp;errorCode); //Opens device attached to system <span class="reserved">if</span> there is one </div><br>
+                            <div> 	<span class="reserved">if</span> (open == 0) { </div><br>
+                            <div> 		<span class="reserved">for</span> (;;) { </div><br>
+                            <div> 			getColor(); </div><br>
+                            <div> 			sleep(1); //Waits one second before getting color again </div><br>
+                            <div> 		} </div><br>
+                            <div> 		<span class="reserved">seabreeze_close_spectrometer</span>(0, &amp;errorCode); //CLoses device </div><br>
+                            <div> 	} </div><br>
+                            <div> 	<span class="reserved">else</span> //Exits program <span class="reserved">if</span> no device is opened </div><br>
+                            <div> 		<span class="reserved">printf</span>(<span class="string">"--NO SPECTROMETER FOUND--\n"</span>); </div><br>
+                            <div> 	return 0; </div><br>
                             <div> } </div><br>
                             <div>  </div><br>
                             <div> <span class="declare">int</span> getColor() { </div><br>
                             <div>  </div><br>
-                            <div> 	<span class="tab"></span><span class="declare">double</span> maxSpec = 0; </div><br>
-                            <div> 	<span class="tab"></span><span class="declare">double</span> maxWave = 0; </div><br>
-                            <div> 	<span class="tab"></span><span class="declare">char</span> model[16]; </div><br>
+                            <div> 	<span class="declare">double</span> maxSpec = 0; </div><br>
+                            <div> 	<span class="declare">double</span> maxWave = 0; </div><br>
+                            <div> 	<span class="declare">char</span> model[16]; </div><br>
                             <div>  </div><br>
-                            <div> 	<span class="tab"></span><span class="declare">int</span> pixels = <span class="reserved">seabreeze_get_formatted_spectrum_length</span>(0, &amp;errorCode); //Acquires a spectrum and returns answer in formatted floats </div><br>
+                            <div> 	<span class="declare">int</span> pixels = <span class="reserved">seabreeze_get_formatted_spectrum_length</span>(0, &amp;errorCode); //Acquires a spectrum and returns answer in formatted floats </div><br>
                             <div>  </div><br>
-                            <div> 	<span class="tab"></span><span class="declare">double</span> *wavelength = (double*) malloc(pixels * <span class="reserved">sizeof</span>(<span class="declare">double</span>)); </div><br>
-                            <div> 	<span class="tab"></span><span class="reserved">seabreeze_get_wavelengths</span>(0,&amp;errorCode,wavelength,pixels); //Computes wavelengths <span class="reserved">for</span> the spectrometer and fills <span class="string">"wavelength" array with those values up to "pixels"</span> value </div><br>
+                            <div> 	<span class="declare">double</span> *wavelength = (double*) malloc(pixels * <span class="reserved">sizeof</span>(<span class="declare">double</span>)); </div><br>
+                            <div> 	<span class="reserved">seabreeze_get_wavelengths</span>(0,&amp;errorCode,wavelength,pixels); //Computes wavelengths <span class="reserved">for</span> the spectrometer and fills <span class="string">"wavelength" array with those values up to "pixels"</span> value </div><br>
                             <div>  </div><br>
-                            <div> 	<span class="tab"></span><span class="declare">double</span> *spectrum = (double*) malloc(pixels * <span class="reserved">sizeof</span>(<span class="declare">double</span>)); </div><br>
-                            <div> 	<span class="tab"></span><span class="reserved">seabreeze_get_formatted_spectrum</span>(0,&amp;errorCode,spectrum,pixels); //Acquires the spectrum and returns in formatted floats and places this in the <span class="string">"spectrum" array up to "pixels"</span> value </div><br>
+                            <div> 	<span class="declare">double</span> *spectrum = (double*) malloc(pixels * <span class="reserved">sizeof</span>(<span class="declare">double</span>)); </div><br>
+                            <div> 	<span class="reserved">seabreeze_get_formatted_spectrum</span>(0,&amp;errorCode,spectrum,pixels); //Acquires the spectrum and returns in formatted floats and places this in the <span class="string">"spectrum" array up to "pixels"</span> value </div><br>
                             <div>  </div><br>
-                            <div> 	<span class="tab"></span><span class="reserved">for</span>(<span class="declare">int</span> i = 0; i&lt;pixels; i += 5){ </div><br>
-                            <div> 		<span class="tab"></span><span class="tab"></span><span class="reserved">for</span>(<span class="declare">int</span> k = 0; k &lt; 5 &amp;&amp; k+i&lt;pixels; k++){ </div><br>
-                            <div> 			<span class="tab"></span><span class="tab"></span><span class="tab"></span><span class="reserved">if</span> (maxSpec &lt; spectrum[k+i] &amp; k + i &gt; 1) { </div><br>
-                            <div> 				<span class="tab"></span><span class="tab"></span><span class="tab"></span><span class="tab"></span>maxSpec = spectrum[k+i]; </div><br>
-                            <div> 				<span class="tab"></span><span class="tab"></span><span class="tab"></span><span class="tab"></span>maxWave = wavelength[k+i]; </div><br>
-                            <div> 			<span class="tab"></span><span class="tab"></span><span class="tab"></span>} </div><br>
-                            <div> 		<span class="tab"></span><span class="tab"></span>} </div><br>
-                            <div> 	<span class="tab"></span>} </div><br>
-                            <div> 	<span class="tab"></span><span class="declare">int</span> LED = 0; </div><br>
-                            <div> 	<span class="tab"></span><span class="reserved">for</span> (<span class="declare">int</span> i = 0; i &lt; 8; i++) { //Compares wavelength of max spectrum reading to determine color based on colors array </div><br>
-                            <div> 		<span class="tab"></span><span class="tab"></span><span class="reserved">if</span> (maxWave &lt; waveStart[i] &amp;&amp; maxWave &gt;= waveStart[i + 1] &amp;&amp; maxSpec &gt; 5000 &amp;&amp; LED == 0) { </div><br>
-                            <div> 			<span class="tab"></span><span class="tab"></span><span class="tab"></span><span class="reserved">printf</span>(<span class="string">"%s\n"</span>, colors[i]); </div><br>
-                            <div> 			<span class="tab"></span><span class="tab"></span><span class="tab"></span>LED = 1; </div><br>
-                            <div> 		<span class="tab"></span><span class="tab"></span>} </div><br>
-                            <div> 	<span class="tab"></span>} </div><br>
-                            <div> 	<span class="tab"></span><span class="reserved">if</span> (LED == 0) //If light source is not bright enough </div><br>
-                            <div> 		<span class="tab"></span><span class="tab"></span><span class="reserved">printf</span>(<span class="string">"NO LED\n"</span>); </div><br>
+                            <div> 	<span class="reserved">for</span>(<span class="declare">int</span> i = 0; i&lt;pixels; i += 5){ </div><br>
+                            <div> 		<span class="reserved">for</span>(<span class="declare">int</span> k = 0; k &lt; 5 &amp;&amp; k+i&lt;pixels; k++){ </div><br>
+                            <div> 			<span class="reserved">if</span> (maxSpec &lt; spectrum[k+i] &amp; k + i &gt; 1) { </div><br>
+                            <div> 				maxSpec = spectrum[k+i]; </div><br>
+                            <div> 				maxWave = wavelength[k+i]; </div><br>
+                            <div> 			} </div><br>
+                            <div> 		} </div><br>
+                            <div> 	} </div><br>
+                            <div> 	<span class="declare">int</span> LED = 0; </div><br>
+                            <div> 	<span class="reserved">for</span> (<span class="declare">int</span> i = 0; i &lt; 8; i++) { //Compares wavelength of max spectrum reading to determine color based on colors array </div><br>
+                            <div> 		<span class="reserved">if</span> (maxWave &lt; waveStart[i] &amp;&amp; maxWave &gt;= waveStart[i + 1] &amp;&amp; maxSpec &gt; 5000 &amp;&amp; LED == 0) { </div><br>
+                            <div> 			<span class="reserved">printf</span>(<span class="string">"%s\n"</span>, colors[i]); </div><br>
+                            <div> 			LED = 1; </div><br>
+                            <div> 		} </div><br>
+                            <div> 	} </div><br>
+                            <div> 	<span class="reserved">if</span> (LED == 0) //If light source is not bright enough </div><br>
+                            <div> 		<span class="reserved">printf</span>(<span class="string">"NO LED\n"</span>); </div><br>
                             <div> } </div><br>
 
                         </code>
