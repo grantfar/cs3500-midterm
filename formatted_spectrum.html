@@ -47,9 +47,17 @@
                 <h3 class="constructor panel-heading">int seabreeze_get_formatted_spectrum(int index, int *error_code, double *buffer, int buffer_length)</h3>
                 <div class="panel-body">
                     <h3>Parameters</h3>
-
+                    <h4>int: index</h4>
+                    The index of a device previously opened with seabreeze_open_spectrometer
+                    <h4>int *: error_code</h4>
+                    A pointer to an integer that can be used for storing error codes
+                    <h4>double *: buffer</h4>
+                    A buffer (With memory already allocated) to hold the spectral data
+                    <h4>int: buffer_length</h4>
+                    The length of the buffer in floats
                     <h3>Returns</h3>
-
+                    <h4>int</h4>
+                    The number of floats read to the buffer
                     <h3>Example</h3>
                     <code>
                         
