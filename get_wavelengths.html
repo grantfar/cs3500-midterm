@@ -2,12 +2,13 @@
 <html>
 <head>
 	<title>Seabreeze Tutorial: seabreeze_get_wavelengths</title>
-        <meta  charset="utf-8">
-        <link rel="stylesheet" href="css/reset.css">
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <link rel="stylesheet" href="css/theme.css">
-        <link rel="stylesheet" href="css/sidebar.css">
-        <link rel="stylesheet" href="css/master.css">
+    <meta  charset="utf-8">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href="css/code.css">
 	<link rel="stylesheet" href="css/method.css">
     <script
             src="http://code.jquery.com/jquery-3.3.1.min.js"
@@ -40,5 +41,30 @@
             </div>
         </div>
     </nav>
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-default">
+                <h3 class="constructor panel-heading">seabreeze_get_wavelengths(int index, int *error_code, double *wavelengths, int length)</h3>
+                <div class="panel-body">
+                    <h3>Parameters</h3>
+                    <h4>int: index</h4>
+                    The index of the device you want to get readings from, previously opened with seabreeze_open_spectrometer.
+                    <h4>int *: error_code</h4>
+                    A pointer to an integer that can be used for storing error codes.
+                    <h4>double *: wavelengths</h4>
+                    An array of doubles that the wavelengths will be copied to.
+                    <h4>int: length</h4>
+                    The number of values to copy into the wavelength array.
+                    <h3>Returns</h3>
+                    <h4>int</h4>
+                    seabreeze_get_wavelengths returns the number of wavelengths that were written to the wavelengths array.
+                    <h3>Example</h3>
+                    <code>
+                        
+                    </code>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

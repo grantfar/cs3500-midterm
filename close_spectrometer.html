@@ -2,13 +2,13 @@
 <html>
 <head>
 	<title>Seabreeze Tutorial: seabreeze_close_spectrometer</title>
-        <meta  charset="utf-8">
-        <link rel="stylesheet" href="css/reset.css">
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <link rel="stylesheet" href="css/theme.css">
-        <link rel="stylesheet" href="css/sidebar.css">
-        <link rel="stylesheet" href="css/master.css">
-        <link rel="stylesheet" href="css/code.css">
+    <meta  charset="utf-8">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href="css/code.css">
 	<link rel="stylesheet" href="css/method.css">
     <script
             src="http://code.jquery.com/jquery-3.3.1.min.js"
@@ -41,5 +41,35 @@
             </div>
         </div>
     </nav>
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-default">
+                <h3 class="constructor panel-heading">seabreeze_close_spectrometer(int index, int *error_code)</h3>
+                <div class="panel-body">
+                    <h3>Parameters</h3>
+                    <h4>int: index</h4>
+                    Just like seabreeze_open_spectrometer, this is the device index for which the method will close the spectrometer from 0 to n-1 for n devices.
+                    <h4>int *: error_code</h4>
+                    A pointer to an integer that can be used for storing error codes.
+                    <h3>Returns</h3>
+                    This function always returns 1.
+                    <h3>Example</h3>
+                    <code>
+                        // This example will carry over the openDevices int array from seabreeze_open_spectrometer <br>
+                        <br>
+                        for (int i = n - 1; i >= 0; i--) {
+                        <section class="tab"> <br>
+                            if (openDevices[i] == 1) {
+                            <section class="tab"> <br>
+                                seabreeze_close_spectrometer(i, &amp;error_code);
+                            </section> <br>
+                            }
+                        </section> <br>
+                        }
+                    </code>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
