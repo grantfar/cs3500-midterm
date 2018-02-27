@@ -56,7 +56,13 @@
                     An integer denoting the length of a formatted spectrum (In pixels)
                     <h3>Example</h3>
                     <code>
-                        
+                        // From this point on, "i" will be used as any index of an open device <br>
+                        // This method will essentially help you with other methods like get_wavelengths and get_formatted_spectrum <br>
+                        // It could be called inside the parameters of those methods in place of the "length" or "buffer_length" parameters, <br>
+                        // but it's more resource-conservative to call it once and store it as an int <br>
+                        // If you are using multiple devices, you could store the different lengths in an array with the appropriate indices <br>
+                        <br>
+                        int pixels = seabreeze_get_formatted_spectrum_length(i, &amp;error_code);
                     </code>
                 </div>
             </div>

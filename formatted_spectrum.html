@@ -60,7 +60,16 @@
                     The number of floats read to the buffer
                     <h3>Example</h3>
                     <code>
-                        
+                        // To get a reading of the spectrum, you'll need the spectrum length <br>
+                        int pixels = seabreeze_get_formatted_spectrum_length(i, &amp;error_code); <br>
+                        <br>
+                        // You will need an array as large as the spectrum length <br>
+                        double *spectrum = malloc(pixels * sizeof(doubles)); <br>
+                        <br>
+                        // After calling this method, "spectrum" will be full of the spectrum intensity along the wavelengths covered by your spectrometer <br>
+                        // The matching indices of the "wavelengths" array and the "spectrum" array will give you the wavelength and intensity at that wavelength
+                        seabreeze_get_formatted_spectrum(i, &amp;error_code, &amp;spectrum, pixels);<br>
+
                     </code>
                 </div>
             </div>

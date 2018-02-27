@@ -56,21 +56,32 @@
                     If the device at the current index is successfully opened, the function will return 0. If the current index doesn't open, 1 will be returned and error_code will be set.
                     <h3>Example</h3>
                     <code>
+                        // "n" in this case will be the number of devices attached to whatever is running your program <br>
+                        // If you know the index of the spectrometer, you can forgo the loop and use that for "index", though this could be risky if it doesn't successfully open <br>
+                        // In the event that you have multiple spectrometers, you should have an array to keep track of their indices, otherwise a single integer will work <br>
                         int openDevices[n]; <br>
+                        <br>
+                        // These variables will be for error handling, be sure their scope reaches anywhere a device is open <br>
+                        int error_code; <br>
                         char *buf = malloc(1024); <br>
                         <br>
+                        // If there is only one device, you can change the loop to exit when a device successfully opens <br>
                         for (int i = 0; i < n; i++) { <br>
                         <section class="tab"> <br>
+                            // True if device opens successfully<br>
                             if (seabreeze_open_spectrometer(i, &amp;error_code) == 0) {
                             <section class="tab"> <br>
                                 openDevices[i] = 1; <br>
                                 printf("Device found at %d", i);
                             </section> <br>
                             } <br>
+                            // Device did not open at index <br>
                             else {
                             <section class="tab"> <br>
                                 openDevices[i] = 0; <br>
                                 printf("Device not found at %d", i); <br>
+                                <br>
+                                // Error handling <br>
                                 seabreeze_get_error_string(error_code, &amp;buf, sizeof(buf)); <br>
                                 printf("%s", buf);
                             </section> <br>

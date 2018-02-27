@@ -60,7 +60,15 @@
                     seabreeze_get_wavelengths returns the number of wavelengths that were written to the wavelengths array.
                     <h3>Example</h3>
                     <code>
-                        
+                        // Typically, the "length" parameter will be equal to the formatted spectrum length <br>
+                        int pixels = seabreeze_get_formatted_spectrum_length(i, &amp;error_code); <br>
+                        <br>
+                        // This is an array of doubles that will be used to store wavelengths <br>
+                        // It should be able to hold as many doubles as the spectrum length <br>
+                        double *wavelengths = malloc(pixels * sizeof(double)); <br>
+                        <br>
+                        // After using this method, "wavelengths" will be full of the wavelengths over the spectrum length <br>
+                        seabreeze_get_wavelengths(i, &amp;error_code, &amp;wavelengths, pixels);
                     </code>
                 </div>
             </div>
