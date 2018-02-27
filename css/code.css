@@ -49,4 +49,22 @@ code div{
 }
 #example1Collapse, #example1Wrap, #example2Collapse, #example2Wrap {
     width: 150px;
+    white-space: normal;
+    max-width: 100%;
 }
+.panel-heading.row{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+@media screen and (max-width: 767px){
+    .panel-heading a, .panel-heading a:visited, .panel-heading a:link, col-xs-2.col-sm-3 {
+        font-size: 2.8em;
+        height: 100%;
+        display: block;
+    }
+    .glyphicon{
+        vertical-align: middle;
+    }
+}
+
