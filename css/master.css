@@ -2,8 +2,12 @@
     width: 100%;
     height: auto;
 }
-
 .panel>.panel-heading {
     color: lightblue;
     background:#333;
+a {
+	color: darkblue;
+}
+div ul {
+	margin-left: 10px;
 }
