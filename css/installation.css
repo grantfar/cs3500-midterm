@@ -10,3 +10,14 @@ ul ul li {
 #prereq li {
 	padding-top: 5px;
 }
+a {
+	color: darkblue;
+}
+.terminal {
+	background-color: lightgray;
+	display: inline;
+	color: black;
+	border-radius: 2px;
+	padding: 0 2px;
+	overflow: auto;
+}

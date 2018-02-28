@@ -57,6 +57,8 @@
                                 <li>Linux</li>
                                 <ul>
                                     <li>If you already have another OS installed, you can dual boot Linux or run it on a virtual machine</li>
+                                    <li>Other OS's can run SeaBreeze, but this tutorial will focus on Linux</li>
+                                    <li>Info on using these other OS's can be found in the <a href="https://oceanoptics.com/api/seabreeze/">SeaBreeze documentation</a></li>
                                 </ul>
                                 <li>An Ocean Optics spectrometer</li>
                                 <ul>
@@ -81,14 +83,32 @@
                                         <li>Jaz</li>
                                     </ul>
                                 </ul>
+                                <li>libusb-dev 0.1</li>
+                                <li>gcc or g++</li>
                             </ul>
                         </div>
                         <div class="col-md-4 hidden-sm hidden-xs"><img class="img-thumbnail img-fluid" src="img/usb4000-960x960.jpg" alt="Ocean Optics Spectrometer"></div>
                     </div>
-                    <h1>Downloading SeaBreeze</h1>
-                    <p>
-                        <a href="https://oceanoptics.com/product/seabreeze/">SeaBreeze </a>
-                    </p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1>Downloading SeaBreeze</h1>
+                            <ul>
+                                <li>Download from the <a href="https://oceanoptics.com/product/seabreeze/" target="blank">SeaBreeze Product Site</a></li>
+                                <li>Unzip the contents of the download</li>
+                            </ul>
+                            <h1>Setting Up the Libraries</h1>
+                            <p>
+                                On the Linux terminal, cd to the "seabreeze-3.0.1.1" directory. <br>
+                                From there, enter: <br>
+                                <span class="terminal">sudo cp -R SeaBreeze/include/ /usr/local/include/ &amp;&amp; sudo mv usr/local/include/include/ /user/local/include/SeaBreeze &amp;&amp; sudo cp SeaBreeze/lib/libseabreeze.so /usr/lib &amp;&amp; sudo ldconfig -n -v /usr/lib</span> <br>
+                            </p>
+                            <h1>File Headers</h1>
+                            <p>
+                                We would recommend finding the file "SeaBreezeWrapper.h" in the SeaBreeze folder and placing it somewhere you can easily access it from the file you are writing. (There is another API "SeaBreezeAPI.h" that is available, this tutorial will be focusing on "SeaBreezeWrapper.h"). <br>
+                                If your SeaBreezeWrapper.h file is placed in an "api" directory in the directory your program is in, you would put <span class="terminal">#include "api/SeaBreezeWrapper.h"</span> in your file headers.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

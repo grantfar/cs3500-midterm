@@ -57,14 +57,14 @@
                     <code>
                         // This example will carry over the openDevices int array from seabreeze_open_spectrometer <br>
                         <br>
-                        for (int i = n - 1; i >= 0; i--) {
-                        <section class="tab"> <br>
-                            if (openDevices[i] == 1) {
-                            <section class="tab"> <br>
-                                seabreeze_close_spectrometer(i, &amp;error_code);
-                            </section> <br>
-                            }
-                        </section> <br>
+                        for (int i = n - 1; i &lt;= 0; i--) {
+                        <br>
+                        <span class="tab"></span>if (openDevices[i] == 1) {
+                        <br>
+                        <span class="tab"></span><span class="tab"></span>seabreeze_close_spectrometer(i, &amp;error_code);
+                        <br>
+                        <span class="tab"></span>}
+                        <br>
                         }
                     </code>
                 </div>
