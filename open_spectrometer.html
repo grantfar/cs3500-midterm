@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<title>SeaBreeze Tutorial: seabreeze_open_spectrometer</title>
     <meta  charset="utf-8">
@@ -66,27 +66,27 @@
                         char *buf = malloc(1024); <br>
                         <br>
                         // If there is only one device, you can change the loop to exit when a device successfully opens <br>
-                        for (int i = 0; i < n; i++) { <br>
-                        <section class="tab"> <br>
-                            // True if device opens successfully<br>
-                            if (seabreeze_open_spectrometer(i, &amp;error_code) == 0) {
-                            <section class="tab"> <br>
-                                openDevices[i] = 1; <br>
-                                printf("Device found at %d", i);
-                            </section> <br>
-                            } <br>
-                            // Device did not open at index <br>
-                            else {
-                            <section class="tab"> <br>
-                                openDevices[i] = 0; <br>
-                                printf("Device not found at %d", i); <br>
+                        for (int i = 0; i &lt; n; i++) { <br>
+                        <br>
+                        <span class="tab"></span>// True if device opens successfully<br>
+                        <span class="tab"></span>if (seabreeze_open_spectrometer(i, &amp;error_code) == 0) {
+                        <br>
+                        <span class="tab"></span><span class="tab"></span>openDevices[i] = 1; <br>
+                        <span class="tab"></span><span class="tab"></span>printf("Device found at %d", i);
+                        <br>
+                        <span class="tab"></span>} <br>
+                        <span class="tab"></span>// Device did not open at index <br>
+                        <span class="tab"></span>else {
+                        <br>
+                        <span class="tab"></span><span class="tab"></span>openDevices[i] = 0; <br>
+                        <span class="tab"></span><span class="tab"></span>printf("Device not found at %d", i); <br>
                                 <br>
-                                // Error handling <br>
-                                seabreeze_get_error_string(error_code, &amp;buf, sizeof(buf)); <br>
-                                printf("%s", buf);
-                            </section> <br>
-                            }
-                        </section> <br>
+                        <span class="tab"></span><span class="tab"></span>// Error handling <br>
+                        <span class="tab"></span><span class="tab"></span>seabreeze_get_error_string(error_code, &amp;buf, sizeof(buf)); <br>
+                        <span class="tab"></span><span class="tab"></span>printf("%s", buf);
+                        <br>
+                        <span class="tab"></span>}
+                        <br>
                         }
                     </code>
                 </div>

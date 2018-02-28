@@ -2,7 +2,6 @@
     width: 100%;
     height: auto;
 }
-
 .panel>.panel-heading {
     color: lightblue;
     background:#333;
@@ -10,5 +9,10 @@
 
 .panel-body h1,.panel-body h2,.panel-body h3,.panel-body h4,.panel-body h5{
     color: #113;
-    font-weight: bolder;
+    font-weight: bolder;}
+a {
+	color: darkblue;
+}
+div ul {
+	margin-left: 10px;
 }
