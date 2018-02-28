@@ -7,3 +7,8 @@
     color: lightblue;
     background:#333;
 }
+
+.panel-body h1,.panel-body h2,.panel-body h3,.panel-body h4,.panel-body h5{
+    color: #113;
+    font-weight: bolder;
+}

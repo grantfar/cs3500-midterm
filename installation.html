@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>SeaBreeze Tutorial: Installation</title>
-	<meta  charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/theme.css">
-	<meta  charset="utf-8">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/theme.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/sidebar.css">
-    <link rel="stylesheet" href="css/master.css">
-    <link rel="stylesheet" href="css/installation.css">
-    <script
-            src="http://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
-    <script src="js/bootstrap.min.js"></script>
-</head>
-<body>
-	<nav class="navbar navbar-default">
+    <head>
+        <title>SeaBreeze Tutorial: Installation</title>
+        <meta  charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="css/reset.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/theme.css">
+        <meta  charset="utf-8">
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/theme.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/sidebar.css">
+        <link rel="stylesheet" href="css/master.css">
+        <link rel="stylesheet" href="css/installation.css">
+        <script
+                src="http://code.jquery.com/jquery-3.3.1.min.js"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                crossorigin="anonymous"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.html">SeaBreeze</a>
                 <button class="navbar-toggle navbar-toggle-right" data-target="#navbar-links" data-toggle="collapse" type="button"><span class="glyphicon glyphicon-menu-hamburger
@@ -49,48 +49,59 @@
         <div class="container">
             <div class="row">
                 <div class="panel panel-default">
-                    <h1>Prerequisites</h1>
-                    <p>Before we get started, you will need:</p>
-                    <div class="row">
-                        <div class="col-md-8 col-xs-12">
-                            <ul id="prereq">
-                                <li>Linux</li>
-                                <ul>
-                                    <li>If you already have another OS installed, you can dual boot Linux or run it on a virtual machine</li>
-                                </ul>
-                                <li>An Ocean Optics spectrometer</li>
-                                <ul>
-                                    <li>Supported spectrometers (As of 2/26/18):</li>
+                    <div class="panel-body">
+                        <h1>Prerequisites</h1>
+                        <p>Before we get started, you will need:</p>
+                        <div class="row">
+                            <div class="col-md-8 col-xs-12">
+                                <ul id="prereq">
+                                    <li>Linux</li>
                                     <ul>
-                                        <li>STS</li>
-                                        <li>Spark</li>
-                                        <li>Flame-S</li>
-                                        <li>Flame-T</li>
-                                        <li>Flame-NIR</li>
-                                        <li>USB2000+</li>
-                                        <li>USB4000</li>
-                                        <li>HR2000</li>
-                                        <li>HR4000</li>
-                                        <li>Maya2000Pro</li>
-                                        <li>Maya-LSL</li>
-                                        <li>QEPro</li>
-                                        <li>QE65Pro</li>
-                                        <li>NIRQuest (256/512)</li>
-                                        <li>Ventana</li>
-                                        <li>Torus</li>
-                                        <li>Jaz</li>
+                                        <li>If you already have another OS installed, you can dual boot Linux or run it on a virtual machine</li>
+                                    </ul>
+                                    <li>An Ocean Optics spectrometer</li>
+                                    <ul>
+                                        <li>Supported spectrometers (As of 2/26/18):</li>
+                                        <ul>
+                                            <li>STS</li>
+                                            <li>Spark</li>
+                                            <li>Flame-S</li>
+                                            <li>Flame-T</li>
+                                            <li>Flame-NIR</li>
+                                            <li>USB2000+</li>
+                                            <li>USB4000</li>
+                                            <li>HR2000</li>
+                                            <li>HR4000</li>
+                                            <li>Maya2000Pro</li>
+                                            <li>Maya-LSL</li>
+                                            <li>QEPro</li>
+                                            <li>QE65Pro</li>
+                                            <li>NIRQuest (256/512)</li>
+                                            <li>Ventana</li>
+                                            <li>Torus</li>
+                                            <li>Jaz</li>
+                                        </ul>
                                     </ul>
                                 </ul>
-                            </ul>
+                            </div>
+                            <div class="col-md-4 hidden-sm hidden-xs"><img class="img-thumbnail img-fluid" src="img/usb4000-960x960.jpg" alt="Ocean Optics Spectrometer"></div>
                         </div>
-                        <div class="col-md-4 hidden-sm hidden-xs"><img class="img-thumbnail img-fluid" src="img/usb4000-960x960.jpg" alt="Ocean Optics Spectrometer"></div>
+                        <h1>Downloading SeaBreeze</h1>
+                        <p>
+                            <a href="https://oceanoptics.com/product/seabreeze/">SeaBreeze </a>
+                        </p>
+                        <h1>Compiling Seabreeze</h1>
+                        <p>
+                            Seabreeze cannot be compiled with newer versions of gcc/g++ without majorly edits of the makefiles/code. To circumvent this we can install older versions. To do so in ubuntu type:<br>
+                            <code>sudo apt install gcc5</code><br>
+                            This installs gcc5 but we need to set it to default
+                        </p>
+                        <p>
+                            To set gcc5 as default, we use update-alternatives
+                        </p>
                     </div>
-                    <h1>Downloading SeaBreeze</h1>
-                    <p>
-                        <a href="https://oceanoptics.com/product/seabreeze/">SeaBreeze </a>
-                    </p>
                 </div>
             </div>
         </div>
-</body>
+    </body>
 </html>
